@@ -1,0 +1,1 @@
+// The configuration of all the elements of the page
