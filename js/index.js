@@ -1,5 +1,5 @@
 // packages.js
-import { getUser, getPackages, getReviews, createUser, saveReview, deleteUser } from './connection.js'
+import { getUser, getPackages, getReviews, getDestinations, createUser, saveReview, deleteUser } from './connection.js'
 
 const formInsert = document.querySelector('.formInsert') // Selects the form
 const formRev = document.querySelector('.formRev') // Selects the form
@@ -9,10 +9,12 @@ const btnRev = document.querySelector('.btnRev')
 let currentUser = {}
 let revs = []
 let packages = []
+let destinations = []
 
 document.addEventListener('DOMContentLoaded', async(e) => {
     // revs = await getReviews() -> esta linea se carga al dar click en un paquete, debe filtrarse por "package"
     // packages = await getPackages() -> esta linea se carga al dar click en "paquetes"
+    // destinations = await getDestinations() //-> esta linea se carga al dar click en "destinos"
 })
 
 formInsert.addEventListener('input', () => {
