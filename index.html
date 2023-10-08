@@ -10,6 +10,96 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    
+    <form name="formInsert" class="formInsert">
+        <fieldset>
+            <label for="name" class="etiqueta-label">Name:</label>
+            <input
+                type="text"
+                name="name"
+                id="name"
+                class="input-formulario"
+                placeholder="Enter your name"
+                style="width: 100%" 
+                required
+            >
+            <label for="email" class="etiqueta-label">Email:</label>
+            <input
+                type="text"
+                name="email"
+                id="email"
+                class="input-formulario"
+                placeholder="Enter your email"
+                style="width: 100%" 
+                required
+            >
+            <label for="password" class="etiqueta-label">Password:</label>
+            <input
+                type="text"
+                name="password"
+                id="password"
+                class="input-formulario"
+                placeholder="Enter your password"
+                style="width: 100%" 
+                required
+            >
+            <label for="place" class="etiqueta-label">Place:</label>
+            <input
+                type="text"
+                name="place"
+                id="place"
+                class="input-formulario"
+                placeholder="Enter your place of origin"
+                style="width: 100%" 
+                required
+            >
+            <label for="username" class="etiqueta-label">Username:</label>
+            <input
+                type="text"
+                name="username"
+                id="username"
+                class="input-formulario"
+                placeholder="Enter your username"
+                style="width: 100%" 
+                required
+            >
+        </fieldset>
+    </form>
+    <button type="submit" class="btnSend" id="btnSend" disabled="True">Save</button>
+
+    <form name="formRev" class="formRev">
+        <fieldset>
+            <label for="package" class="etiqueta-label">Package choosen:</label>
+            <select name="pack" id="pack" class="input-formulario" style="width: 100%" required>
+                <option value="">Select an option</option>
+                <option value="op1">1</option>
+                <option value="op2">2</option>
+                <option value="op3">3</option>
+                <option value="op4">4</option>
+            </select>
+            <label for="review" class="etiqueta-label">Review:</label>
+            <input
+                type="text"
+                name="review"
+                id="review"
+                class="input-formulario"
+                placeholder="Enter your review"
+                style="width: 100%" 
+                required
+            >
+            <label for="stars" class="etiqueta-label">Rate your package:</label>
+            <select name="stars" id="stars" class="input-formulario" style="width: 100%" required>
+                <option value="">Select</option>
+                <option value="st1">1</option>
+                <option value="st2">2</option>
+                <option value="st3">3</option>
+                <option value="st4">4</option>
+                <option value="st5">5</option>
+            </select>
+        </fieldset>
+    </form>
+    <button type="submit" class="btnRev" id="btnRev" disabled="True">Save</button>
+
+    <script type="module" src="./js/connection.js"></script>
+    <script type="module" src="./js/index.js"></script>
 </body>
 </html>
