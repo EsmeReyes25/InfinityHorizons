@@ -71,3 +71,8 @@ a {
     display: flex;
     justify-content: center;
 }
+
+.card-exp {
+    display: flex;
+    justify-content: center;
+}
