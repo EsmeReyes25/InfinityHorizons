@@ -19,6 +19,7 @@ const database = getFirestore()
 const users = collection(database, "users")
 const packages = collection(database, "packages")
 const reviews = collection(database, "reviews")
+const destinations = collection(database, "destinations")
 
 // Define the routes using the corresponding HTTP methods
 // GET
@@ -49,6 +50,19 @@ const getPackages = async () => {
             returnPackages.push(packag.data())
         })
         return returnPackages
+    } catch (err) {
+        console.error("Error! Couldn't get the elements from the database:", err)
+    }
+}
+
+const getDestinations = async () => {
+    const arrayDestinations = await getDocs(destinations)
+    try {
+        let returnDestinations = []
+        arrayDestinations.forEach(destination => {
+            returnDestinations.push(destination.data())
+        })
+        return returnDestinations
     } catch (err) {
         console.error("Error! Couldn't get the elements from the database:", err)
     }
@@ -107,4 +121,4 @@ const deleteUser = async (user) => {
     }
 }
 
-export { getUser, getPackages, getReviews, createUser, saveReview, deleteUser }
+export { getUser, getPackages, getReviews, getDestinations, createUser, saveReview, deleteUser }
