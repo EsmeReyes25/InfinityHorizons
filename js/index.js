@@ -7,6 +7,13 @@ const btnSend = document.querySelector('.btnSend')
 const btnRev = document.querySelector('.btnRev')
 
 let currentUser = {}
+let revs = []
+let packages = []
+
+document.addEventListener('DOMContentLoaded', async(e) => {
+    // revs = await getReviews() -> esta linea se carga al dar click en un paquete, debe filtrarse por "package"
+    // packages = await getPackages() -> esta linea se carga al dar click en "paquetes"
+})
 
 formInsert.addEventListener('input', () => {
     if (!formInsert.email.value || !formInsert.name.value || !formInsert.password.value || !formInsert.place.value || !formInsert.username.value ) {
@@ -73,9 +80,5 @@ const insertReview = async () => {
     await saveReview(review)
     formRev.reset()
     return
-}
-
-const deleteUs = async (user) => {
-    await deleteUser(user)
 }
 
