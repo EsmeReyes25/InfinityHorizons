@@ -16,8 +16,9 @@ document.addEventListener('DOMContentLoaded', async(e) => {
     revs = await getReviews() 
     packages = await getPackages() 
     destinations = await getDestinations() 
-    console.log(destinations)
+    console.log(packages)
     fillDestinationCards()
+    fillExperienceCards()
 })
 
 const fillDestinationCards = () => {
@@ -36,6 +37,21 @@ const fillDestinationCards = () => {
     });
 }
 
+const fillExperienceCards = () => {
+    const cardExp = document.querySelectorAll('.card-exp'); // Obtener todas las tarjetas
+
+    packages.forEach((packag, index) => {
+        const card = cardExp[index]; // Obtener la tarjeta correspondiente
+        if (card) {
+            // Rellenar la tarjeta con los datos del destino
+            const cardTitle = card.querySelector('.card-title');
+            const cardText = card.querySelector('.card-text');
+
+            cardTitle.textContent = packag.name; // Establecer el título del destino
+            cardText.textContent = packag.description; // Establecer la descripción del destino
+        }
+    });
+}
 
 formInsert.addEventListener('input', () => {
     if (!formInsert.email.value || !formInsert.name.value || !formInsert.password.value || !formInsert.place.value || !formInsert.username.value ) {
