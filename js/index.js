@@ -16,9 +16,25 @@ document.addEventListener('DOMContentLoaded', async(e) => {
     revs = await getReviews() 
     packages = await getPackages() 
     destinations = await getDestinations() 
-    console.log(packages)
+
     fillDestinationCards()
+    // Agregar eventos de clic a las tarjetas de destino
+    const destinationCards = document.querySelectorAll('.card-dest');
+    destinationCards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+            // Manejar el clic en la tarjeta
+            handleCardClick(destinations[index]);
+        });
+    });
+
     fillExperienceCards()
+    const packageCards = document.querySelectorAll('.card-pack');
+    packageCards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+            // Manejar el clic en la tarjeta
+            handlePackClick(packages[index]);
+        });
+    });
 })
 
 const fillDestinationCards = () => {
@@ -38,7 +54,7 @@ const fillDestinationCards = () => {
 }
 
 const fillExperienceCards = () => {
-    const cardExp = document.querySelectorAll('.card-exp'); // Obtener todas las tarjetas
+    const cardExp = document.querySelectorAll('.card-pack'); // Obtener todas las tarjetas
 
     packages.forEach((packag, index) => {
         const card = cardExp[index]; // Obtener la tarjeta correspondiente
@@ -51,6 +67,98 @@ const fillExperienceCards = () => {
             cardText.textContent = packag.description; // Establecer la descripción del destino
         }
     });
+}
+
+const handleCardClick = (destination) => {
+    // Obtener el modal y sus elementos
+    const modal = document.querySelector('#exampleModal');
+    const modalTitle = modal.querySelector('.modal-title');
+
+    // Rellenar el contenido del modal con los datos del destino
+    modalTitle.textContent = destination.name;
+    const templateContent = document.getElementById('infoDestiny').innerHTML;
+
+    // Inserta el contenido del template en el modal
+    document.querySelector('.modal-body').innerHTML = templateContent;
+    let image = '';
+    if (destination.name === 'Jupiter') {
+        image = 'Jupiter-E/2.webp';
+    } else if (destination.name === 'Moon') {
+        image = 'Luna-M/Parkour_Lunar.jpg'
+    } else if (destination.name === 'Mars') {
+        image = 'Marte-I/fotomonte2.jpg'
+    } else if (destination.name === 'Mercury') {
+        image = 'Mercurio-I/FOTOS/foto3.jpg'
+    } else if (destination.name === 'Neptune') {
+        image = 'Neptuno-M/OIG.jfif'
+    } else if (destination.name === 'Saturn'){
+        image = 'Saturno-E/image1.jpg'
+    } else if (destination.name === 'Uranus') {
+        image = 'Urano-M/diamantes.jfif'
+    } else if (destination.name === 'Venus') {
+        image = 'Venus-I/03.jpg'
+    }
+    document.getElementById('destiny-img').setAttribute('src', `./images/Destinations/${image}`)
+
+    const list = destination.itinerary.split('; ');
+    const ul = document.createElement('ul');
+    list.forEach((element) => {
+        const li = document.createElement('li');
+        li.textContent = element; // Establecer el contenido del elemento de lista
+        ul.appendChild(li); // Agregar el elemento de lista a la lista no ordenada
+    });
+
+    document.getElementById('itinerary-dest').appendChild(ul);
+    document.querySelector('.experience-dest').textContent = destination.experience
+    document.querySelector('.cautions-dest').textContent = destination.cautions
+    document.querySelector('.limitants-dest').textContent = destination.limitants
+    document.querySelector('.recommends-dest').textContent = destination.recommendations
+    // Mostrar el modal
+    const modalInstance = new bootstrap.Modal(modal);
+    modalInstance.show();
+}
+
+const handlePackClick = (pack) => {
+    // Obtener el modal y sus elementos
+    const modal = document.querySelector('#exampleModal2');
+    const modalTitle = modal.querySelector('.modal-title');
+
+    // Rellenar el contenido del modal con los datos del destino
+    modalTitle.textContent = pack.name;
+    const templateContent = document.getElementById('infoPack').innerHTML;
+
+    // Inserta el contenido del template en el modal
+    document.querySelector('.modal-body').innerHTML = templateContent;
+    let image = '';
+    if (pack.name === 'Friends') {
+        image = 'Amigos/Amigos_Mercurio.jfif';
+    } else if (pack.name === 'Lovers') {
+        image = 'Enamorados/cena_Luna.jfif';
+    } else if (pack.name === 'X-treme') {
+        image = 'Extremo/p4.jpg'
+    } else if (pack.name === 'Familiar') {
+        image = 'Familiar/uranus.jfif'
+    } else if (pack.name === 'Around the Solar System in 12 days') {
+        image = 'SS/ooo.jfif'
+    } 
+    document.getElementById('pack-img').setAttribute('src', `./images/Packages/${image}`)
+
+    const list = pack.itinerary.split('; ');
+    const ul = document.createElement('ul');
+    list.forEach((element) => {
+        const li = document.createElement('li');
+        li.textContent = element; // Establecer el contenido del elemento de lista
+        ul.appendChild(li); // Agregar el elemento de lista a la lista no ordenada
+    });
+
+    document.getElementById('itinerary-pack').appendChild(ul);
+    document.querySelector('.experience-pack').textContent = pack.experience
+    document.querySelector('.cautions-pack').textContent = pack.cautions
+    document.querySelector('.limitants-pack').textContent = pack.limitants
+    document.querySelector('.recommends-pack').textContent = pack.recommendations
+    // Mostrar el modal
+    const modalInstance = new bootstrap.Modal(modal);
+    modalInstance.show();
 }
 
 formInsert.addEventListener('input', () => {
@@ -70,40 +178,14 @@ formRev.addEventListener('input', () => {
 })
 
 btnSend.addEventListener('click', async() => {
-    console.log("ButtonSend clicked");
     await insertUser()
     //window.location.reload()
 })
 
 btnRev.addEventListener('click', async() => {
-    console.log("ButtonRev clicked");
     await insertReview()
     //window.location.reload()
 })
-
-// const printDetailsDestiny = () => {
-    // destinations.forEach(destination => {
-    //     if (destination.name === 'Jupiter') {
-    //         cardsDestiny.querySelector('.jupiter').textContent = destination.description
-    //     } else if (destination.name === 'Moon') {
-    //         cardsDestiny.querySelector('.moon').textContent = destination.description
-    //     } else if (destination.name === 'Mars') {
-    //         cardsDestiny.querySelector('.mars').textContent = destination.description
-    //     } else if (destination.name === 'Mercury') {
-    //         cardsDestiny.querySelector('.mercury').textContent = destination.description
-    //     } else if (destination.name === 'Neptune') {
-    //         cardsDestiny.querySelector('.neptune').textContent = destination.description
-    //     } else if (destination.name === 'Saturn'){
-    //         cardsDestiny.querySelector('.saturn').textContent = destination.description
-    //     } else if (destination.name === 'Uranus') {
-    //         cardsDestiny.querySelector('.uranus').textContent = destination.description
-    //     } else if (destination.name === 'Venus') {
-    //         cardsDestiny.querySelector('.venus').textContent = destination.description
-    //     }
-    // })    
-//}
-
-// printDetailsDestiny()
 
 const insertUser = async () => {
         const newUser = {
