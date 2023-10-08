@@ -44,7 +44,11 @@ const getUser = async (userDat) => {
 const getPackages = async () => {
     const arrayPackages = await getDocs(packages)
     try {
-        return arrayPackages
+        let returnPackages = []
+        arrayPackages.forEach(packag => {
+            returnPackages.push(packag.data())
+        })
+        return returnPackages
     } catch (err) {
         console.error("Error! Couldn't get the elements from the database:", err)
     }
@@ -54,7 +58,11 @@ const getReviews = async () => {
     const arrayReviews = await getDocs(reviews)
     // reviews.doc(email) -> reviews del usuario
     try {
-        return arrayReviews
+        let returnRevs = []
+        arrayReviews.forEach(rev => {
+            returnRevs.push(rev.data())
+        })
+        return returnRevs
     } catch (err) {
         console.error("Error! Couldn't get the elements from the database:", err)
     }
